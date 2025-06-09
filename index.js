@@ -9,13 +9,16 @@ const PORT = process.env.PORT;
 
 app.use(
     cors({
-        origin: process.env.FRONT_URL,
+        // origin: "*",
+        origin: process.env.FRONT_URL, //http://localhost:5174/
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", routeToDO);
+app.use("/task", routeToDO);
 
 app.listen(PORT, () => console.log("servidor conectado"));
 

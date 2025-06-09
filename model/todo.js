@@ -2,26 +2,46 @@ import mongoose from "mongoose";
 import toDoSchema from "../schema/todo.js";
 
 class toDoModel {
-    async create(todo) {
-        return await toDoSchema.create(todo);
+    async create(data) {
+        try {
+            return await toDoSchema.create(data);
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 
-    async update(id, todo) {
-        return await toDoSchema.findByIdAndUpdate(
-            { _id: new mongoose.Types.ObjectId(id) },
-            todo,
-            { new: true }
-        );
+    async update(id, data) {
+        try {
+            return await toDoSchema.findByIdAndUpdate(
+                { _id: new mongoose.Types.ObjectId(id) },
+                data,
+                { new: true }
+            );
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 
     async delete(id) {
-        return await toDoSchema.deleteOne({
-            _id: new mongoose.Types.ObjectId(id),
-        });
+        try {
+            return await toDoSchema.deleteOne({
+                _id: new mongoose.Types.ObjectId(id),
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 
     async getAll() {
-        return await toDoSchema.find();
+        try {
+            return await toDoSchema.find();
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 }
 

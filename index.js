@@ -7,12 +7,14 @@ import "dotenv/config";
 const app = express();
 const PORT = process.env.PORT;
 
+const allowedOrigins = [
+    process.env.PRODU_URL, // Para produccion
+    process.env.DEV_URL, // Para desarrollo
+];
+
 app.use(
     cors({
-        // origin: "*",
-        origin: process.env.FRONT_URL, //http://localhost:5174/
-        methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+        origin: allowedOrigins,
     })
 );
 app.use(express.json());
